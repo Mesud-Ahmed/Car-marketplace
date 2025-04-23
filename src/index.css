@@ -3,6 +3,21 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --color-hero-bg: #F5F7FA;
+  --color-text-dark-blue: #1E293B;
+  --color-text-light-gray: #6B7280;
+  --color-text-dark-gray: #1F2937;
+  --color-dropdown-placeholder: #9CA3AF;
+  --color-dropdown-active: #4B5563;
+  --color-search-purple: #7C3AED;
+  --color-card-bg: #1E3A8A;
+  --color-icon-gradient-start: #7C3AED;
+  --color-icon-gradient-end: #3B82F6;
+}
+body {
+  font-family: 'Inter', sans-serif;
+}
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
