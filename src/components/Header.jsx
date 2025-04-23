@@ -52,7 +52,7 @@ function Header() {
         <div className="order-2 sm:order-3 my-4 sm:my-0">
         <Button
           variant="outline"
-          className="border-gray-200 text-text-dark-gray hover:bg-gray-50"
+          className="border-gray-200 text-text-dark-gray hover:bg-gray-50 bg-green-100"
           
         >
           <Link to='/profile'>Admin page</Link>

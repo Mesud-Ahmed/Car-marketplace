@@ -4,6 +4,7 @@ import UploadImages from "../components/UploadImages";
 import InputField from "@/components/InputField";
 import TextAreaField from "@/components/TextAreaField";
 import DropDwonField from "@/components/DropDwonField";
+import Header from "@/components/Header";
 
 
 const AddListing = () => {
@@ -64,6 +65,9 @@ const AddListing = () => {
   };
 
   return (
+    <>
+  
+    <Header/>
     <div className="px-10 md:px-20 my-10">
       <h2 className="font-bold text-4xl">Add New Listing</h2>
       <div className="p-10 border rounded-xl mt-10">
@@ -134,6 +138,8 @@ const AddListing = () => {
         </div>
       </div>
     </div>
+      
+    </>
   );
 };
 
