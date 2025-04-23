@@ -53,8 +53,10 @@ function Header() {
         <Button
           variant="outline"
           className="border-gray-200 text-text-dark-gray hover:bg-gray-50"
+          
         >
-          Admin page
+          <Link to='/profile'>Admin page</Link>
+          
         </Button>
       </div>
       </nav>
