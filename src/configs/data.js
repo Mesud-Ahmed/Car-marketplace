@@ -1,24 +1,43 @@
+import { 
+  FaTag, 
+  FaComment, 
+  FaDollarSign, 
+  FaCar, 
+  FaCheckCircle, 
+  FaBolt, 
+  FaIndustry, 
+  FaCarSide, 
+  FaCalendar, 
+  FaCog, 
+  FaCogs, 
+  FaWrench, 
+  FaTachometerAlt, 
+  FaPalette, 
+  FaGift, 
+  FaFileAlt 
+} from 'react-icons/fa';
+
 export const carDetails = {
-    carDetails: [
-      { label: "Listing Title", name: "listingTitle", fieldType: "text", required: true, column: 2 },
-      { label: "Tagline", name: "tagline", fieldType: "text", column: 2 },
-      { label: "Original Price", name: "originalPrice", fieldType: "text", column: 1 },
-      { label: "Selling Price", name: "sellingPrice", fieldType: "text", required: true, column: 1 },
-      { label: "Category", name: "category", fieldType: "dropdown", required: true, options: ["Sedan", "SUV", "Truck", "Coupe"], column: 1 },
-      { label: "Condition", name: "condition", fieldType: "dropdown", required: true, options: ["New", "Used", "Certified Pre-Owned"], column: 1 },
-      { label: "Type", name: "type", fieldType: "dropdown", required: true, options: ["Electric", "Hybrid", "Petrol"], column: 1 },
-      { label: "Make", name: "make", fieldType: "dropdown", required: true, options: ["Toyota", "Honda", "Ford", "Chevrolet", "Nissan", "BMW", "Mercedes-Benz", "Rolls-Royce", "Aston Martin", "Ferrari", "Lamborghini", "McLaren", "Pagani", "Bugatti"], column: 1 },
-      { label: "Model", name: "model", fieldType: "text", column: 1 },
-      { label: "Year", name: "year", fieldType: "number", required: true, column: 1 },
-      { label: "Drive Type", name: "driveType", fieldType: "dropdown", required: true, options: ["FWD", "RWD", "AWD", "4WD"], column: 1 },
-      { label: "Transmission", name: "transmission", fieldType: "dropdown", required: true, column: 1, options: ["Automatic", "Manual"] },
-      { label: "Engine Size", name: "engineSize", fieldType: "text", column: 1 },
-      { label: "Cylinder", name: "cylinder", fieldType: "number", column: 1 },
-      { label: "Color", name: "color", fieldType: "text", column: 1 },
-      { label: "Offer Type", name: "offerType", fieldType: "dropdown", options: ["Buy", "Hot Offer", "Sell", "Urgent"], column: 2 },
-      { label: "Listing Description", name: "listingDescription", fieldType: "textarea", required: true, column: 2 },
-    ],
-  };
+  carDetails: [
+    { label: "Listing Title", name: "listingTitle", fieldType: "text", required: true, column: 2, icon: FaTag },
+    { label: "Tagline", name: "tagline", fieldType: "text", column: 2, icon: FaComment },
+    { label: "Original Price", name: "originalPrice", fieldType: "text", column: 1, icon: FaDollarSign },
+    { label: "Selling Price", name: "sellingPrice", fieldType: "text", required: true, column: 1, icon: FaDollarSign },
+    { label: "Category", name: "category", fieldType: "dropdown", required: true, options: ["Sedan", "SUV", "Truck", "Coupe"], column: 1, icon: FaCar },
+    { label: "Condition", name: "condition", fieldType: "dropdown", required: true, options: ["New", "Used", "Certified Pre-Owned"], column: 1, icon: FaCheckCircle },
+    { label: "Type", name: "type", fieldType: "dropdown", required: true, options: ["Electric", "Hybrid", "Petrol"], column: 1, icon: FaBolt },
+    { label: "Make", name: "make", fieldType: "dropdown", required: true, options: ["Toyota", "Honda", "Ford", "Chevrolet", "Nissan", "BMW", "Mercedes-Benz", "Rolls-Royce", "Aston Martin", "Ferrari", "Lamborghini", "McLaren", "Pagani", "Bugatti"], column: 1, icon: FaIndustry },
+    { label: "Model", name: "model", fieldType: "text", column: 1, icon: FaCarSide },
+    { label: "Year", name: "year", fieldType: "number", required: true, column: 1, icon: FaCalendar },
+    { label: "Drive Type", name: "driveType", fieldType: "dropdown", required: true, options: ["FWD", "RWD", "AWD", "4WD"], column: 1, icon: FaCog },
+    { label: "Transmission", name: "transmission", fieldType: "dropdown", required: true, column: 1, options: ["Automatic", "Manual"], icon: FaCogs },
+    { label: "Engine Size", name: "engineSize", fieldType: "text", column: 1, icon: FaWrench },
+    { label: "Cylinder", name: "cylinder", fieldType: "number", column: 1, icon: FaTachometerAlt },
+    { label: "Color", name: "color", fieldType: "text", column: 1, icon: FaPalette },
+    { label: "Offer Type", name: "offerType", fieldType: "dropdown", options: ["Buy", "Hot Offer", "Sell", "Urgent"], column: 2, icon: FaGift },
+    { label: "Listing Description", name: "listingDescription", fieldType: "textarea", required: true, column: 2, icon: FaFileAlt },
+  ],
+};
   
   export const features = {
     features: [
