@@ -13,6 +13,7 @@ import {
       <Select
         onValueChange={(value) => handleInputChange(item.name, value)}
         name={item.name}
+        
       >
         <SelectTrigger className="w-full">
           <SelectValue placeholder={`Select ${item.label}`} />

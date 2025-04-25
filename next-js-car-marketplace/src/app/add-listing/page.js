@@ -8,6 +8,8 @@ import DropDownField from "@/components/DropDownField";
 import IconField from "@/components/IconField";
 import { Button } from "@/components/ui/button";
 import { FiLoader } from "react-icons/fi";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function AddListingPage() {
   const [formData, setFormData] = useState({});
@@ -53,8 +55,8 @@ export default function AddListingPage() {
     const dataToSubmit = {
       listingTitle: formData.listingTitle,
       tagline: formData.tagline,
-      originalPrice: parseInt(formData.originalPrice) || 0,
-      sellingPrice: parseInt(formData.sellingPrice),
+      originalPrice: formData.originalPrice,
+      sellingPrice: formData.sellingPrice,
       category: formData.category,
       condition: formData.condition,
       type: formData.type,
@@ -109,11 +111,11 @@ export default function AddListingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {carDetails.carDetails.map((item, index) => (
               <div key={index}>
-                <label className="text-sm flex gap-2 items-center mb-2">
+                <Label htmlFor={item.name} className="text-sm flex gap-2 items-center mb-2">
                   <IconField icon={item.icon} />
                   {item.label}{" "}
                   {item.required && <span className="text-red-500">*</span>}
-                </label>
+                </Label>
 
                 {item.fieldType === "text" || item.fieldType === "number" ? (
                   <InputField
@@ -141,13 +143,13 @@ export default function AddListingPage() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
             {features.features.map((item, index) => (
               <div key={index} className="flex gap-2 items-center">
-                <input
-                  type="checkbox"
+                <Checkbox
+                id={item.name}
                   onChange={(e) =>
                     handleFeaturesChange(item.name, e.target.checked)
                   }
                 />
-                <h2>{item.label}</h2>
+                <label htmlFor={item.name}>{item.label}</label>
               </div>
             ))}
           </div>
