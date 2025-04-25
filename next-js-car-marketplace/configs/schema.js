@@ -12,6 +12,7 @@ export const Carlisting = pgTable("Carlisting", {
   make: text("make").notNull(),
   model: text("model"),
   year: integer("year").notNull(),
+  mileage: integer("mileage").notNull(),
   driveType: text("drive_type").notNull(),
   transmission: text("transmission").notNull(),
   engineSize: text("engine_size"),

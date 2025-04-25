@@ -27,6 +27,7 @@ const Profile = () => {
           </Button>
         </div>
       </div>
+      {/* fetch the car listings from the db and display them in responsive grid layout with few  */}
     </div>
   );
 };

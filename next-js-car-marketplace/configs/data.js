@@ -14,8 +14,10 @@ import {
   FaTachometerAlt, 
   FaPalette, 
   FaGift, 
-  FaFileAlt 
+  FaFileAlt ,
+   
 } from 'react-icons/fa';
+import { GiAutoRepair } from "react-icons/gi";
 
 export const carDetails = {
   carDetails: [
@@ -29,10 +31,11 @@ export const carDetails = {
     { label: "Make", name: "make", fieldType: "dropdown", required: true, options: ["Toyota", "Honda", "Ford", "Chevrolet", "Nissan", "BMW", "Mercedes-Benz", "Rolls-Royce", "Aston Martin", "Ferrari", "Lamborghini", "McLaren", "Pagani", "Bugatti"], column: 1, icon: FaIndustry },
     { label: "Model", name: "model", fieldType: "text", column: 1, icon: FaCarSide },
     { label: "Year", name: "year", fieldType: "number", required: true, column: 1, icon: FaCalendar },
+    { label: "Mileage", name: "mileage", fieldType: "number", required: true, column: 1, icon: FaTachometerAlt },
     { label: "Drive Type", name: "driveType", fieldType: "dropdown", required: true, options: ["FWD", "RWD", "AWD", "4WD"], column: 1, icon: FaCog },
     { label: "Transmission", name: "transmission", fieldType: "dropdown", required: true, column: 1, options: ["Automatic", "Manual"], icon: FaCogs },
     { label: "Engine Size", name: "engineSize", fieldType: "text", column: 1, icon: FaWrench },
-    { label: "Cylinder", name: "cylinder", fieldType: "number", column: 1, icon: FaTachometerAlt },
+    { label: "Cylinder", name: "cylinder", fieldType: "number", column: 1, icon: GiAutoRepair  },
     { label: "Color", name: "color", fieldType: "text", column: 1, icon: FaPalette },
     { label: "Offer Type", name: "offerType", fieldType: "dropdown", options: ["Buy", "Hot Offer", "Sell", "Urgent"], column: 2, icon: FaGift },
     { label: "Listing Description", name: "listingDescription", fieldType: "textarea", required: true, column: 2, icon: FaFileAlt },

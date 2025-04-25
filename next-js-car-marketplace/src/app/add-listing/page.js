@@ -63,6 +63,7 @@ export default function AddListingPage() {
       make: formData.make,
       model: formData.model,
       year: parseInt(formData.year),
+      mileage: parseInt(formData.mileage),
       driveType: formData.driveType,
       transmission: formData.transmission,
       engineSize: formData.engineSize,
