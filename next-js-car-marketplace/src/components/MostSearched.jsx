@@ -75,7 +75,7 @@ async function MostSearched() {
                       </div>
                     </div>
                     <div className="flex justify-between items-center mt-4">
-                      <p className="font-bold text-2xl">${car.sellingPrice}</p>
+                      <p className="font-bold text-2xl">{car.sellingPrice} <span className="font-semibold text-sm">ETB</span> </p>
                       <a
                         href={`/listings/${car.id}`}
                         className="flex items-center text-sm hover:underline"
