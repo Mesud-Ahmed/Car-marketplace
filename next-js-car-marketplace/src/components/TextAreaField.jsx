@@ -1,5 +1,5 @@
 import { Textarea } from "./ui/textarea"
-const TextAreaField =  ({ item, handleInputChange })  => {
+const TextAreaField =  ({ item, handleInputChange,value })  => {
   return (
     (
       <Textarea
@@ -7,6 +7,7 @@ const TextAreaField =  ({ item, handleInputChange })  => {
         onChange={(e) => handleInputChange(item.name, e.target.value)}
         className="border rounded p-2 w-full"
         placeholder={item.label}
+        defaultValue={value}
         rows={4}
       />
     )

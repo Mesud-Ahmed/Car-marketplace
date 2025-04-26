@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { carDetails, features } from "../../../configs/data";
 import UploadImages from "../../components/UploadImages";
 import InputField from "@/components/InputField";
@@ -12,11 +13,53 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 
 export default function AddListingPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState({});
   const [featuresData, setFeaturesData] = useState({});
   const [imageUrls, setImageUrls] = useState([]);
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(null);
+  const [listingId, setListingId] = useState(null);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get("listingId");
+    if (id) {
+      setListingId(id);
+      fetch(`/api/listings/${id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.data) {
+            const listing = data.data;
+            setFormData({
+              listingTitle: listing.listingTitle,
+              tagline: listing.tagline,
+              originalPrice: listing.originalPrice,
+              sellingPrice: listing.sellingPrice,
+              category: listing.category,
+              condition: listing.condition,
+              type: listing.type,
+              make: listing.make,
+              model: listing.model,
+              year: listing.year.toString(),
+              driveType: listing.driveType,
+              transmission: listing.transmission,
+              engineSize: listing.engineSize,
+              cylinder: listing.cylinder?.toString() || "",
+              color: listing.color,
+              offerType: listing.offerType,
+              listingDescription: listing.listingDescription,
+              mileage: listing.mileage?.toString() || "",
+            });
+            setFeaturesData(listing.features || {});
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching listing:", err);
+          setError("Failed to load listing data.");
+        });
+    }
+  }, []);
 
   const handleInputChange = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -54,10 +97,22 @@ export default function AddListingPage() {
       return;
     }
 
+    const numberPattern = /^[0-9,]+$/;
+    if (formData.originalPrice && !numberPattern.test(formData.originalPrice)) {
+      setError("Original Price must be a valid number (e.g 230,000)");
+      setLoader(false);
+      return;
+    }
+    if (!numberPattern.test(formData.sellingPrice)) {
+      setError("Selling Price must be a valid number (e.g 230,000)");
+      setLoader(false);
+      return;
+    }
+
     const dataToSubmit = {
       listingTitle: formData.listingTitle,
       tagline: formData.tagline,
-      originalPrice: formData.originalPrice,
+      originalPrice: formData.originalPrice || null,
       sellingPrice: formData.sellingPrice,
       category: formData.category,
       condition: formData.condition,
@@ -65,7 +120,6 @@ export default function AddListingPage() {
       make: formData.make,
       model: formData.model,
       year: parseInt(formData.year),
-      mileage: parseInt(formData.mileage),
       driveType: formData.driveType,
       transmission: formData.transmission,
       engineSize: formData.engineSize,
@@ -73,13 +127,17 @@ export default function AddListingPage() {
       color: formData.color,
       offerType: formData.offerType,
       listingDescription: formData.listingDescription,
+      mileage: parseInt(formData.mileage) || null,
       features: featuresData,
-      images: imageUrls,
+      images: imageUrls.length > 0 ? imageUrls : formData.images || [],
     };
 
     try {
-      const response = await fetch("/api/listings", {
-        method: "POST",
+      const url = listingId ? `/api/listings/${listingId}` : "/api/listings";
+      const method = listingId ? "PUT" : "POST";
+
+      const response = await fetch(url, {
+        method,
         headers: {
           "Content-Type": "application/json",
         },
@@ -92,14 +150,16 @@ export default function AddListingPage() {
 
       const result = await response.json();
       console.log("data saved", result);
-      alert("Car listing added successfully!");
+      alert(
+        listingId
+          ? "Car listing updated successfully!"
+          : "Car listing added successfully!"
+      );
 
-      setFormData({});
-      setFeaturesData({});
-      setImageUrls([]);
+      router.push("/profile");
     } catch (e) {
       console.error("error", e);
-      alert("Failed to add car listing. Please try again.");
+      alert("Failed to save car listing. Please try again.");
     } finally {
       setLoader(false);
     }
@@ -107,7 +167,9 @@ export default function AddListingPage() {
 
   return (
     <div className="px-10 md:px-20 my-10">
-      <h2 className="font-bold text-4xl">Add New Listing</h2>
+      <h2 className="font-bold text-4xl">
+        {listingId ? "Edit Listing" : "Add New Listing"}
+      </h2>
       <form onSubmit={onSubmit} className="p-10 border rounded-xl mt-10">
         <div>
           <h2 className="font-medium text-xl mb-6">Car Details</h2>
@@ -127,16 +189,19 @@ export default function AddListingPage() {
                   <InputField
                     item={item}
                     handleInputChange={handleInputChange}
+                    value={formData[item.name] || ""}
                   />
                 ) : item.fieldType === "dropdown" ? (
                   <DropDownField
                     item={item}
                     handleInputChange={handleInputChange}
+                    value={formData[item.name] || ""}
                   />
                 ) : item.fieldType === "textarea" ? (
                   <TextAreaField
                     item={item}
                     handleInputChange={handleInputChange}
+                    value={formData[item.name] || ""}
                   />
                 ) : null}
               </div>
@@ -151,8 +216,9 @@ export default function AddListingPage() {
               <div key={index} className="flex gap-2 items-center">
                 <Checkbox
                   id={item.name}
-                  onChange={(e) =>
-                    handleFeaturesChange(item.name, e.target.checked)
+                  checked={featuresData[item.name] || false}
+                  onCheckedChange={(checked) =>
+                    handleFeaturesChange(item.name, checked)
                   }
                 />
                 <label htmlFor={item.name}>{item.label}</label>
@@ -169,7 +235,13 @@ export default function AddListingPage() {
         {error && <p className="text-red-500 mt-4">{error}</p>}
         <div className="mt-10 flex justify-end">
           <Button type="submit" disabled={loader}>
-            {loader ? <FiLoader className="animate-spin text-lg" /> : "Submit"}
+            {loader ? (
+              <FiLoader className="animate-spin text-lg" />
+            ) : listingId ? (
+              "Update Listing"
+            ) : (
+              "Submit"
+            )}
           </Button>
         </div>
       </form>

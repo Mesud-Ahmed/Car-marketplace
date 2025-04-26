@@ -51,7 +51,7 @@ async function MostSearched() {
                     alt={`${car.make} ${car.model}`}
                     width={400}
                     height={160}
-                    className="w-full h-40 md:object-cover rounded-t-lg"
+                    className="w-full h-40 object-cover rounded-t-lg"
                   />
 
                   <div className="p-4">

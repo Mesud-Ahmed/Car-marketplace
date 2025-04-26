@@ -8,15 +8,15 @@ import {
     SelectValue,
   } from "@/components/ui/select";
   
-  const DropdownField = ({ item, handleInputChange }) => {
+  const DropdownField = ({ item, handleInputChange,value }) => {
     return (
       <Select
         onValueChange={(value) => handleInputChange(item.name, value)}
         name={item.name}
-        
+        defaultValue={value}
       >
         <SelectTrigger className="w-full">
-          <SelectValue placeholder={`Select ${item.label}`} />
+          <SelectValue placeholder={value == ""?`Select ${item.label}`:value} />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>

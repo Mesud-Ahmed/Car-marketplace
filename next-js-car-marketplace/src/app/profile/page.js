@@ -66,7 +66,7 @@ const Profile = async () => {
                   <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
                     <div className="flex items-center gap-1">
                       <MdSpeed />
-                      <span>{listing.mileage} Miles</span>
+                      <span>{listing.mileage || 0} Miles</span>
                     </div>
 
                     <div className="flex items-center gap-1">
@@ -81,12 +81,31 @@ const Profile = async () => {
                   <p className="mt-3 text-lg font-bold text-gray-800">
                     {listing.sellingPrice} ETB
                   </p>
-                  <Link
-                    href={`/listings/${listing.id}`}
-                    className="mt-3 inline-block text-blue-600 hover:underline text-sm"
-                  >
-                    View Details
-                  </Link>
+                  <div className="mt-3 flex gap-2">
+                    <Link
+                      href={`/listings/${listing.id}`}
+                      className="inline-block text-blue-600 hover:underline text-sm"
+                    >
+                      View Details
+                    </Link>
+                  </div>
+                  <div className="flex justify-between p-2">
+                    <Button
+                      asChild
+                      className="inline-block text-green-600 bg-gray-200 hover:bg-gray-100 text-sm"
+                    >
+                      <Link href={`/add-listing?listingId=${listing.id}`}>
+                        Edit
+                      </Link>
+                    </Button>
+
+                    <button
+                      className="inline-block text-red-600  text-sm"
+                      disabled
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}
