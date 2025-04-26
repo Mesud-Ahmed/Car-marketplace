@@ -1,6 +1,6 @@
-'use client'
+"use client";
 import { useState } from "react";
-import { carDetails,features } from "../../../configs/data";
+import { carDetails, features } from "../../../configs/data";
 import UploadImages from "../../components/UploadImages";
 import InputField from "@/components/InputField";
 import TextAreaField from "@/components/TextAreaField";
@@ -31,7 +31,9 @@ export default function AddListingPage() {
     setLoader(true);
     setError(null);
 
-    const requiredFields = carDetails.carDetails.filter((item) => item.required);
+    const requiredFields = carDetails.carDetails.filter(
+      (item) => item.required
+    );
     const missingFields = requiredFields.filter(
       (item) => !formData[item.name] || formData[item.name].trim() === ""
     );
@@ -112,7 +114,10 @@ export default function AddListingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {carDetails.carDetails.map((item, index) => (
               <div key={index}>
-                <Label htmlFor={item.name} className="text-sm flex gap-2 items-center mb-2">
+                <Label
+                  htmlFor={item.name}
+                  className="text-sm flex gap-2 items-center mb-2"
+                >
                   <IconField icon={item.icon} />
                   {item.label}{" "}
                   {item.required && <span className="text-red-500">*</span>}
@@ -145,7 +150,7 @@ export default function AddListingPage() {
             {features.features.map((item, index) => (
               <div key={index} className="flex gap-2 items-center">
                 <Checkbox
-                id={item.name}
+                  id={item.name}
                   onChange={(e) =>
                     handleFeaturesChange(item.name, e.target.checked)
                   }
@@ -164,11 +169,7 @@ export default function AddListingPage() {
         {error && <p className="text-red-500 mt-4">{error}</p>}
         <div className="mt-10 flex justify-end">
           <Button type="submit" disabled={loader}>
-            {loader ? (
-              <FiLoader className="animate-spin text-lg" />
-            ) : (
-              "Submit"
-            )}
+            {loader ? <FiLoader className="animate-spin text-lg" /> : "Submit"}
           </Button>
         </div>
       </form>

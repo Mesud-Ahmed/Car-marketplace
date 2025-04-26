@@ -34,7 +34,6 @@ const Profile = async () => {
           </Button>
         </div>
 
-        
         {carListings.length === 0 ? (
           <p className="text-center text-gray-600">No car listings found.</p>
         ) : (
@@ -45,19 +44,14 @@ const Profile = async () => {
                 className="bg-white rounded-lg shadow-md overflow-hidden"
               >
                 <div className="relative">
-                  {listing.images && listing.images.length > 0 ? (
-                    <Image
-                      src={listing.images[0]}
-                      alt={`${listing.make} ${listing.model}`}
-                      width={400}
-                      height={200}
-                      className="w-full h-48 object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-48 bg-gray-200 flex items-center justify-center">
-                      <span className="text-gray-500">No Image</span>
-                    </div>
-                  )}
+                  <Image
+                    src={listing.images[0]}
+                    alt={`${listing.make} ${listing.model}`}
+                    width={400}
+                    height={200}
+                    className="w-full h-48 object-cover"
+                  />
+
                   {listing.condition === "New" && (
                     <span className="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">
                       New
@@ -70,17 +64,11 @@ const Profile = async () => {
                     {listing.make} {listing.model}
                   </h3>
                   <div className="flex items-center gap-4 mt-2 text-sm text-gray-600">
-                    {listing.mileage ? (
-                      <div className="flex items-center gap-1">
-                        <MdSpeed />
-                        <span>{listing.mileage} Miles</span>
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-1">
-                        <MdSpeed />
-                        <span>0 Miles</span>
-                      </div>
-                    )}
+                    <div className="flex items-center gap-1">
+                      <MdSpeed />
+                      <span>{listing.mileage} Miles</span>
+                    </div>
+
                     <div className="flex items-center gap-1">
                       <BsFuelPump />
                       <span>{listing.type}</span>
