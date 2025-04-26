@@ -157,7 +157,10 @@ export default function AddListingPage() {
           ? "Car listing updated successfully!"
           : "Car listing added successfully!"
       );
-
+      setFormData({});
+      setFeaturesData({});
+      setImageUrls([]);
+      
       router.push("/profile");
     } catch (e) {
       console.error("error", e);
