@@ -21,10 +21,12 @@ export default function AddListingPage() {
   const [error, setError] = useState(null);
   const [listingId, setListingId] = useState(null);
 
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get("listingId");
     if (id) {
+      setIsLoading(true);
       setListingId(id);
       fetch(`/api/listings/${id}`)
         .then((res) => res.json())
@@ -57,7 +59,7 @@ export default function AddListingPage() {
         .catch((err) => {
           console.error("Error fetching listing:", err);
           setError("Failed to load listing data.");
-        });
+        }).finally(() => setIsLoading(false));
     }
   }, []);
 
@@ -164,8 +166,11 @@ export default function AddListingPage() {
       setLoader(false);
     }
   };
-
+  if (isLoading) {
+    return <div className="text-center py-10">Loading...</div>;
+  }
   return (
+    
     <div className="px-10 md:px-20 my-10">
       <h2 className="font-bold text-4xl">
         {listingId ? "Edit Listing" : "Add New Listing"}
