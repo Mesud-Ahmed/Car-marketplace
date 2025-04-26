@@ -1,20 +1,94 @@
+"use client";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { db } from "../../../configs";
-import { Carlisting } from "../../../configs/schema";
 import Image from "next/image";
 import { MdSpeed } from "react-icons/md";
 import { BsFuelPump } from "react-icons/bs";
 import { FaCogs } from "react-icons/fa";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
 
-const Profile = async () => {
+export default function Profile() {
   const user = {
     name: "John Doe",
     email: "john.doe@example.com",
     role: "Admin",
   };
 
-  const carListings = await db.select().from(Carlisting);
+  const [carListings, setCarListings] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [listingToDelete, setListingToDelete] = useState(null);
+  const [isDeleting,setIsDeleting] = useState(false)
+  
+  useEffect(() => {
+    const fetchListings = async () => {
+      try {
+        const response = await fetch("/api/listings");
+        if (!response.ok) {
+          throw new Error("Failed to fetch listings");
+        }
+        const data = await response.json();
+        setCarListings(data.data || []);
+      } catch (err) {
+        console.error("Error fetching listings:", err);
+        setError("Failed to load car listings.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchListings();
+  }, []);
+
+  
+  const handleDelete = async () => {
+    if (!listingToDelete) return;
+    setIsDeleting(true)
+    try {
+      const response = await fetch(`/api/listings/${listingToDelete.id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to delete listing");
+      }
+
+      setCarListings((prev) =>
+        prev.filter((listing) => listing.id !== listingToDelete.id)
+      );
+      setDeleteDialogOpen(false);
+      setListingToDelete(null);
+      
+      alert("Car listing deleted successfully!");
+      setIsDeleting(false)
+    } catch (err) {
+      console.error("Error deleting listing:", err);
+      alert(err.message || "Failed to delete car listing. Please try again.");
+    }
+  };
+
+  const openDeleteDialog = (listing) => {
+    setListingToDelete(listing);
+    setDeleteDialogOpen(true);
+  };
+
+  if (isLoading) {
+    return <div className="text-center py-10">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center py-10 text-red-500">{error}</div>;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -44,13 +118,14 @@ const Profile = async () => {
                 className="bg-white rounded-lg shadow-md overflow-hidden"
               >
                 <div className="relative">
-                  <Image
-                    src={listing.images[0]}
-                    alt={`${listing.make} ${listing.model}`}
-                    width={400}
-                    height={200}
-                    className="w-full h-48 object-cover"
-                  />
+                 
+                    <Image
+                      src={listing.images[0]}
+                      alt={`${listing.make} ${listing.model}`}
+                      width={400}
+                      height={200}
+                      className="w-full h-48 object-cover"
+                    />
 
                   {listing.condition === "New" && (
                     <span className="absolute top-2 left-2 bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded">
@@ -71,11 +146,11 @@ const Profile = async () => {
 
                     <div className="flex items-center gap-1">
                       <BsFuelPump />
-                      <span>{listing.type}</span>
+                      <span>{listing.type || "N/A"}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <FaCogs />
-                      <span>{listing.transmission}</span>
+                      <span>{listing.transmission || "N/A"}</span>
                     </div>
                   </div>
                   <p className="mt-3 text-lg font-bold text-gray-800">
@@ -99,12 +174,43 @@ const Profile = async () => {
                       </Link>
                     </Button>
 
-                    <button
-                      className="inline-block text-red-600  text-sm"
-                      disabled
+                    <Dialog
+                      open={deleteDialogOpen}
+                      onOpenChange={setDeleteDialogOpen}
                     >
-                      Delete
-                    </button>
+                      <DialogTrigger asChild>
+                        <Button
+                          variant="destructive"
+                          className="inline-block text-sm"
+                          onClick={() => openDeleteDialog(listing)}
+                        >
+                          Delete
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Confirm Deletion</DialogTitle>
+                          <DialogDescription>
+                            Are you sure you want to delete the listing for{" "}
+                            <span className="font-semibold">
+                              {listingToDelete?.make} {listingToDelete?.model}
+                            </span>
+                            ? This action cannot be undone.
+                          </DialogDescription>
+                        </DialogHeader>
+                        <DialogFooter className='flex justify-between'>
+                          <Button
+                            variant="outline"
+                            onClick={() => setDeleteDialogOpen(false)}
+                          >
+                            Cancel
+                          </Button>
+                          <Button variant="destructive" onClick={handleDelete} >
+                           {isDeleting?'Deleting':'Delete'} 
+                          </Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </div>
               </div>
@@ -114,6 +220,4 @@ const Profile = async () => {
       </div>
     </div>
   );
-};
-
-export default Profile;
+}

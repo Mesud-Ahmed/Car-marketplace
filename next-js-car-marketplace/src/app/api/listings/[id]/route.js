@@ -47,3 +47,25 @@ export async function PUT(request, { params }) {
     return NextResponse.json({ error: "Failed to update listing" }, { status: 500 });
   }
 }
+
+export async function DELETE(request, { params }) {
+  try {
+    const { id } = params;
+    const result = await db
+      .delete(Carlisting)
+      .where(eq(Carlisting.id, parseInt(id)))
+      .returning();
+
+    if (result.length === 0) {
+      return NextResponse.json({ error: "Listing not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(
+      { message: "Listing deleted successfully" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error deleting listing:", error);
+    return NextResponse.json({ error: "Failed to delete listing" }, { status: 500 });
+  }
+}
