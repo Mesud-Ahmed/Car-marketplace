@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 import CarItem from "../../../components/CarItem";
 
 export default async function CarsByType({ params }) {
-  const { type } = params;
+  const { type } = await params;
 
   const formattedType = type.charAt(0).toUpperCase() + type.slice(1)
 

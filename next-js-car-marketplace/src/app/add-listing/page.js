@@ -129,7 +129,7 @@ export default function AddListingPage() {
       color: formData.color,
       offerType: formData.offerType,
       listingDescription: formData.listingDescription,
-      mileage: parseInt(formData.mileage) || null,
+      mileage: parseInt(formData.mileage) || 0,
       features: featuresData,
       images: imageUrls.length > 0 ? imageUrls : formData.images || [],
     };
