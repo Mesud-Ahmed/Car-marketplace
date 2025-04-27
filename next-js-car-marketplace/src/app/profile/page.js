@@ -158,7 +158,7 @@ export default function Profile() {
                   </p>
                   <div className="mt-3 flex gap-2">
                     <Link
-                      href={`/listings/${listing.id}`}
+                      href={`/listing-detail/${listing.id}`}
                       className="inline-block text-blue-600 hover:underline text-sm"
                     >
                       View Details

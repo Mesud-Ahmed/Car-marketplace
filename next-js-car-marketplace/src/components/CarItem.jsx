@@ -3,9 +3,8 @@ import { MdSpeed } from "react-icons/md";
 import { BsFuelPump } from "react-icons/bs";
 import { FaCogs } from "react-icons/fa";
 import { ArrowRight } from "lucide-react";
-
-
-const CarItem = ({car}) => {
+import Link from "next/link";
+const CarItem = ({ car }) => {
   return (
     <div className="bg-[#050B20] rounded-lg shadow-md w-full text-white">
       <Image
@@ -41,12 +40,13 @@ const CarItem = ({car}) => {
             {car.sellingPrice}{" "}
             <span className="font-semibold text-sm">ETB</span>{" "}
           </p>
-          <a
-            href={`/listings/${car.id}`}
-            className="flex items-center text-sm hover:underline"
+
+          <Link
+            href={`/listing-detail/${car.id}`}
+            className="inline-block text-blue-600 hover:underline text-sm"
           >
-            View Details <ArrowRight className="ml-1 h-4 w-4" />
-          </a>
+            View Details 
+          </Link>
         </div>
       </div>
     </div>
