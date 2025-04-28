@@ -39,14 +39,14 @@ function Header() {
           Home
         </Link>
         <Link
-          href="/about"
+          href="/"
           className="text-text-light-gray hover:text-text-dark-gray"
           onClick={() => setIsMenuOpen(false)}
         >
           About
         </Link>
         <Link
-          href="/contact"
+          href="/"
           className="text-text-light-gray hover:text-text-dark-gray"
           onClick={() => setIsMenuOpen(false)}
         >
