@@ -3,6 +3,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import logo from '../../assets/logo.jpg'
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,9 +14,9 @@ function Header() {
   };
 
   return (
-    <header className="flex flex-col sm:flex-row justify-between items-center p-4 bg-white shadow-sm">
-      <div className="flex justify-between w-full sm:w-auto items-center">
-        <h1 className="text-2xl font-bold text-text-dark-gray">BOXCARS</h1>
+    <header className=" bg-gray-200 flex flex-col sm:flex-row justify-between items-center p-4  shadow-sm">
+      <div className=" flex justify-between w-full sm:w-auto items-center">
+        <Image src={logo} width={60} height={60} alt='logo' className='rounded-full'/>
         <button
           className="sm:hidden"
           onClick={toggleMenu}

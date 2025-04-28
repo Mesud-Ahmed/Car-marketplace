@@ -19,8 +19,8 @@ const Footer = () => {
         <div className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
           <div className="flex items-center text-gray-700">
             <FaPhone className="mr-2 size-5" />
-            <a href="tel:+2519252758" className="hover:text-gray-700/75 transition">
-              09252758
+            <a href="tel:+251992229292" className="hover:text-gray-700/75 transition">
+            +251992229292
             </a>
           </div>
           <div className="flex items-center text-gray-700">
@@ -34,7 +34,7 @@ const Footer = () => {
         <ul className="mt-12 flex justify-center gap-6 md:gap-8">
           <li>
             <a
-              href="https://t.me/yourtelegram"
+              href="https://t.me/@Ab_Cars"
               rel="noreferrer"
               target="_blank"
               className="text-gray-700 transition hover:text-gray-700/75"
