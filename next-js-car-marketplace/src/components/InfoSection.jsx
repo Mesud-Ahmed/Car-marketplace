@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import footerCar from '../../assets/footerCar.png';
 
 const InfoSection = () => {
