@@ -68,7 +68,7 @@ function Hero() {
 
   return (
     <section className="relative h-[600px] w-full">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 ">
         <Image
           src={sidecar}
           alt="A sleek car on display for Car Marketplace"
