@@ -4,6 +4,7 @@ import { eq } from "drizzle-orm";
 import Image from "next/image";
 import { features } from "../../../../configs/data";
 import { FaCircle, FaCalendar, FaTachometerAlt, FaCogs, FaGasPump, FaPhone, FaTelegramPlane } from "react-icons/fa";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"; // Adjust import based on your setup
 
 const capitalizeWords = (str) => {
   if (!str) return "";
@@ -14,7 +15,7 @@ const capitalizeWords = (str) => {
 };
 
 export default async function ListingDetail({ params }) {
-  const { id } = await params; 
+  const { id } = await params;
 
   let car = null;
   let error = null;
@@ -73,14 +74,35 @@ export default async function ListingDetail({ params }) {
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+         
             <div>
-              <Image
-                src={car.images[0] || "/placeholder-car.jpg"}
-                alt={car.listingTitle}
-                width={600}
-                height={400}
-                className="w-full h-80 object-cover rounded-lg shadow-md"
-              />
+              <Carousel
+                opts={{
+                  align: "start",
+                  loop: true,
+                }}
+                className="w-full"
+              >
+                <CarouselContent>
+                  {car.images.map((image, index) => (
+                    <CarouselItem key={`${car.id}-${index}`} className="basis-full">
+                      <div className="relative w-full h-80">
+                        <Image
+                          src={image || "/placeholder-car.jpg"}
+                          alt={`${car.listingTitle} image ${index + 1}`}
+                          layout="fill"
+                          objectFit="cover"
+                          className="rounded-lg shadow-md"
+                        />
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                <div className="flex justify-center gap-4 mt-5">
+                  <CarouselPrevious className="bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 cursor-pointer relative top-0 left-0 transform-none" />
+                  <CarouselNext className="bg-white border border-gray-200 text-gray-600 hover:bg-gray-50 cursor-pointer relative top-0 right-0 transform-none" />
+                </div>
+              </Carousel>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between">
               <div>
@@ -113,20 +135,6 @@ export default async function ListingDetail({ params }) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
-            {car.images.length > 1 && (
-              <div className="flex gap-2 mb-4 overflow-x-auto">
-                {car.images.map((image, index) => (
-                  <Image
-                    key={index}
-                    src={image}
-                    alt={`${car.listingTitle} thumbnail ${index + 1}`}
-                    width={100}
-                    height={60}
-                    className="h-16 w-24 object-cover rounded-md cursor-pointer hover:opacity-80"
-                  />
-                ))}
-              </div>
-            )}
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h2 className="text-2xl font-bold text-gray-800">Description</h2>
               <p className="mt-2 text-gray-600">{car.listingDescription}</p>
