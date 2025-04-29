@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Abraham Car Market
 
-## Getting Started
+**Abraham Car Market** is a modern web application built with **Next.js** and **Drizzle ORM**, designed to provide a seamless platform for browsing, filtering, and managing car listings. The application features a responsive UI, secure admin access, and an intuitive user experience for car enthusiasts and sellers alike.
 
-First, run the development server:
+## Live Preview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Check out the live demo of the application here: [ Live Preview](https://car-marketplace-eight-jet.vercel.app/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Dynamic Car Listings**:
+  - Browse cars by type (e.g., SUV, Sedan, Electric, Hybrid) with a dedicated page for each category.
+  - View detailed car listings with specifications, features, pricing, and a carousel of images.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Image Carousel for Listings**:
+  - A responsive image carousel on the car listing detail page to showcase multiple car images with navigation buttons at the bottom.
 
-## Learn More
+- **Responsive Design**:
+  - Optimized for all screen sizes, with adjustments for mobile screens .
+  - Tailwind CSS ensures a consistent and modern design across devices.
 
-To learn more about Next.js, take a look at the following resources:
+- **Admin Access with Basic Authentication**:
+  - Secure access to `/profile` and `/add-listing` routes using Basic Authentication.
+ 
+- **Loading Animations**:
+  - Smooth loading animations on pages that fetch car information using Next.js App Router’s `loading.js` feature.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Database Integration**:
+  - Uses **Drizzle ORM** for efficient database queries and schema management.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+- **Search and Filtering**:
+  - Filter cars by category, type, and other attributes (e.g., year, mileage, transmission).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Contact Options**:
+  - Direct links to contact the seller via phone or Telegram on the listing detail page.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Tech Stack
+
+- **Framework**: Next.js (App Router)
+- **ORM**: Drizzle ORM
+- **Database**: PostgreSQL 
+- **Styling**: Tailwind CSS
+- **UI Components**: `shadcn/ui` 
+- **Icons**: React Icons (`react-icons`)
+- **Deployment**: Vercel
