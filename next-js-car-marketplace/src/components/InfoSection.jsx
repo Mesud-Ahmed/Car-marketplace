@@ -13,7 +13,7 @@ const InfoSection = () => {
                 About Us
               </h2>
               <p className="mt-4 text-lg text-gray-600 leading-relaxed">
-                At Abraham Car Marketplace, we’re passionate about connecting you with your dream car. With a curated selection of vehicles, from luxury SUVs to reliable sedans, we make buying and selling cars simple, transparent, and hassle-free. Our mission is to provide a seamless experience with trusted listings and exceptional customer service.
+                 we’re passionate about connecting you with your dream car. With a curated selection of vehicles, from luxury SUVs to reliable sedans, we make buying and selling cars simple, transparent, and hassle-free. Our mission is to provide a seamless experience with trusted listings and exceptional customer service.
               </p>
               
             </div>

@@ -75,14 +75,22 @@ function Hero() {
           layout="fill"
           objectFit="cover"
           placeholder="blur"
-          className="brightness-75"
+          className="brightness-75 hidden md:block"
+        />
+        <Image
+          src={sidecar}
+          alt="A sleek car on display for Car Marketplace"
+          layout="fill"
+          
+          placeholder="blur"
+          className="brightness-75 block md:hidden"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/30"></div>
       </div>
 
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 sm:px-6 lg:px-8">
         <p className="text-2xl sm:text-3xl lg:text-4xl font-semibold bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent">
-          Abraham Car Market
+          Freedom Car Sale
         </p>
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mt-3 tracking-tight">
           Drive Your Dream Car Today

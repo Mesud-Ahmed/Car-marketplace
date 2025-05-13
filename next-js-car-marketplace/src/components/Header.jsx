@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import logo from '../../assets/logo.jpg'
+import logo from '../../assets/logo.png'
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
